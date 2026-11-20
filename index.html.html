@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OVERTHINK SAATİ ❤️ </title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-top: #0c4a6e;
+            --bg-mid: #0369a1;
+            --bg-bot: #0284c7;
+            --card-bg: rgba(255, 255, 255, 0.12);
+            --card-border: rgba(186, 230, 253, 0.35);
+            --accent-glow: rgba(56, 189, 248, 0.35);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 50%, var(--bg-bot) 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            transition: background 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Dinamik Okyanus Katman Temaları */
+        body.layer-0 {
+            background: linear-gradient(180deg, #1e293b 0%, #0e7490 38%, #0284c7 100%);
+        }
+        body.layer-1 {
+            background: linear-gradient(180deg, #075985 0%, #0369a1 45%, #1e3a8a 100%);
+        }
+        body.layer-2 {
+            background: linear-gradient(180deg, #1e3a8a 0%, #172554 55%, #0f172a 100%);
+        }
+        body.layer-3 {
+            background: linear-gradient(180deg, #0f172a 0%, #090d16 55%, #05070e 100%);
+        }
+        body.layer-4 {
+            background: linear-gradient(180deg, #05070e 0%, #030308 60%, #000000 100%);
+        }
+        body.layer-5 {
+            background: radial-gradient(circle at center, #2a0408 0%, #090102 65%, #000000 100%);
+        }
+
+        /* Buzdağı SVG Konteyneri */
+        #iceberg-viewport {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        #iceberg-rig {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 100%;
+            max-width: 680px;
+            height: 280vh;
+            transform: translateX(-50%) translateY(0vh);
+            transition: transform 1.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Su Yüzeyi Dalgalanması */
+        @keyframes waterShimmer {
+            0%, 100% { transform: translateX(-2%) scaleY(1); opacity: 0.65; }
+            50% { transform: translateX(2%) scaleY(1.08); opacity: 0.9; }
+        }
+
+        .water-line {
+            animation: waterShimmer 4.5s ease-in-out infinite;
+        }
+
+        /* Kabarcık ve Plankton Animasyonları */
+        .bubble {
+            position: fixed;
+            bottom: -20px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            animation: riseBubble linear infinite;
+        }
+
+        @keyframes riseBubble {
+            0% { transform: translateY(0) translateX(0) scale(0.7); opacity: 0; }
+            15% { opacity: 0.65; }
+            85% { opacity: 0.45; }
+            100% { transform: translateY(-108vh) translateX(18px) scale(1.15); opacity: 0; }
+        }
+
+        /* Sonar Halkası */
+        @keyframes sonarPulse {
+            0% { transform: scale(0.6); opacity: 0.7; }
+            100% { transform: scale(2.4); opacity: 0; }
+        }
+
+        .sonar-ring {
+            animation: sonarPulse 3s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        }
+
+        /* Cam Kart (Glassmorphism) */
+        .abyss-card {
+            background: rgba(15, 23, 42, 0.58);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75);
+            transition: all 0.5s ease;
+        }
+
+        body.layer-0 .abyss-card {
+            background: rgba(12, 74, 110, 0.48);
+            border-color: rgba(125, 211, 252, 0.35);
+        }
+
+        body.layer-4 .abyss-card {
+            background: rgba(2, 6, 23, 0.82);
+            border-color: rgba(56, 189, 248, 0.25);
+            box-shadow: 0 0 50px rgba(14, 165, 233, 0.12);
+        }
+
+        body.layer-5 .abyss-card {
+            background: rgba(20, 4, 8, 0.88);
+            border-color: rgba(244, 63, 94, 0.55);
+            box-shadow: 0 0 70px rgba(225, 29, 72, 0.35);
+        }
+
+        /* Seçenek Butonları */
+        .choice-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            transition: all 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .choice-btn:hover {
+            background: rgba(56, 189, 248, 0.16);
+            border-color: rgba(125, 211, 252, 0.55);
+            transform: translateY(-2px);
+        }
+
+        .choice-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* Ekran Sarsıntısı ve Şok Dalgası (Final BAM!) */
+        @keyframes trenchShake {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            15% { transform: translate(-10px, 6px) rotate(-1deg); }
+            30% { transform: translate(10px, -6px) rotate(1deg); }
+            45% { transform: translate(-8px, -4px) rotate(-0.5deg); }
+            60% { transform: translate(8px, 5px) rotate(0.5deg); }
+            75% { transform: translate(-5px, 2px); }
+        }
+
+        .trench-shake {
+            animation: trenchShake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        @keyframes shockwaveExpand {
+            0% { transform: scale(0.1); opacity: 1; border-width: 8px; }
+            100% { transform: scale(3.5); opacity: 0; border-width: 1px; }
+        }
+
+        .shockwave-circle {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 240px;
+            height: 240px;
+            margin-top: -120px;
+            margin-left: -120px;
+            border-radius: 50%;
+            border: 6px solid #f43f5e;
+            pointer-events: none;
+            z-index: 50;
+            animation: shockwaveExpand 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Kart Giriş Animasyonu */
+        @keyframes questionEnter {
+            from { opacity: 0; transform: translateY(16px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .q-enter {
+            animation: questionEnter 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Messi Kaçış Geçişi */
+        #btn-b {
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, border-color 0.2s ease;
+        }
+
+        /* Mühendislik Seçimi Kutlama Efektleri */
+        @keyframes celebrationGlow {
+            0%, 100% {
+                box-shadow: 0 0 35px rgba(251, 191, 36, 0.45), 0 0 70px rgba(16, 185, 129, 0.25);
+                border-color: rgba(251, 191, 36, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 55px rgba(251, 191, 36, 0.75), 0 0 95px rgba(56, 189, 248, 0.4);
+                border-color: rgba(52, 211, 153, 0.95);
+            }
+        }
+
+        .celebration-card {
+            animation: celebrationGlow 2s ease-in-out infinite !important;
+        }
+
+        .confetti-piece {
+            position: fixed;
+            top: -16px;
+            pointer-events: none;
+            z-index: 60;
+            animation: confettiFall linear forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(106vh) translateX(var(--drift-x, 40px)) rotate(720deg) scale(0.85);
+                opacity: 0;
+            }
+        }
+
+        .firework-spark {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 60;
+            animation: sparkBurst 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes sparkBurst {
+            0% {
+                transform: translate(0, 0) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="layer-0 flex flex-col justify-between relative">
+
+    <!-- ARKA PLAN BUZDAĞI & OKYANUS KESİTİ -->
+    <div id="iceberg-viewport">
+        <div id="iceberg-rig">
+            <svg viewBox="0 0 600 1800" preserveAspectRatio="xMidYMin slice" class="w-full h-full">
+                <defs>
+                    <!-- Buzdağı Üst (Görünen Kısım) Gradyanı -->
+                    <linearGradient id="iceTopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+                        <stop offset="50%" stop-color="#e0f2fe" stop-opacity="0.85" />
+                        <stop offset="100%" stop-color="#7dd3fc" stop-opacity="0.75" />
+                    </linearGradient>
+
+                    <!-- Buzdağı Su Altı Gradyanı -->
+                    <linearGradient id="iceSubGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.52" />
+                        <stop offset="28%" stop-color="#0284c7" stop-opacity="0.36" />
+                        <stop offset="62%" stop-color="#1e3a8a" stop-opacity="0.24" />
+                        <stop offset="88%" stop-color="#0f172a" stop-opacity="0.18" />
+                        <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.25" />
+                    </linearGradient>
+
+                    <!-- Su Çizgisi Işıltısı -->
+                    <linearGradient id="surfaceGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0" />
+                        <stop offset="50%" stop-color="#bae6fd" stop-opacity="0.75" />
+                        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+                    </linearGradient>
+                </defs>
+
+                <!-- SU YÜZEYİ ÇİZGİSİ (Y = 230) -->
+                <g class="water-line">
+                    <rect x="0" y="226" width="600" height="6" fill="url(#surfaceGlow)" />
+                    <path d="M0 230 Q 75 222, 150 230 T 300 230 T 450 230 T 600 230" fill="none" stroke="#e0f2fe" stroke-width="2" opacity="0.6" />
+                </g>
+
+                <!-- BUZDAĞI GÖRÜNEN ZİRVE (Su Üstü: Y 90 -> 230) -->
+                <polygon points="300,90 225,165 185,230 415,230 365,155" fill="url(#iceTopGrad)" />
+                <!-- Zirve Poligon Fasetleri (3D Derinlik) -->
+                <polygon points="300,90 315,175 415,230 365,155" fill="#bae6fd" opacity="0.55" />
+                <polygon points="300,90 265,185 185,230 225,165" fill="#ffffff" opacity="0.45" />
+
+                <!-- BUZDAĞI DEVASA SU ALTI GÖVDESİ (Y 230 -> 1680) -->
+                <polygon points="185,230 115,430 85,720 120,1040 165,1360 245,1580 300,1690 365,1560 445,1320 495,980 515,660 465,390 415,230" fill="url(#iceSubGrad)" />
+                
+                <!-- Su Altı Geometrik Kırılma Yüzeyleri -->
+                <polygon points="185,230 295,480 115,430" fill="#7dd3fc" opacity="0.14" />
+                <polygon points="415,230 295,480 465,390" fill="#0369a1" opacity="0.22" />
+                <polygon points="115,430 295,480 260,860 85,720" fill="#38bdf8" opacity="0.10" />
+                <polygon points="465,390 295,480 340,910 515,660" fill="#172554" opacity="0.28" />
+                <polygon points="85,720 260,860 280,1290 120,1040" fill="#1e40af" opacity="0.14" />
+                <polygon points="515,660 340,910 315,1340 495,980" fill="#020617" opacity="0.35" />
+                <polygon points="165,1360 280,1290 300,1690 245,1580" fill="#be123c" opacity="0.12" />
+                <polygon points="445,1320 315,1340 300,1690 365,1560" fill="#881337" opacity="0.18" />
+
+                <!-- Katman Derinlik Çizgileri -->
+                <g stroke="rgba(186, 230, 253, 0.14)" stroke-width="1" stroke-dasharray="6 6">
+                    <line x1="40" y1="450" x2="560" y2="450" />
+                    <line x1="40" y1="750" x2="560" y2="750" />
+                    <line x1="40" y1="1080" x2="560" y2="1080" />
+                    <line x1="40" y1="1400" x2="560" y2="1400" />
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- KABARCIKLAR / BİOLÜMİNESANS PARÇACIKLAR -->
+    <div id="bubbles-layer"></div>
+
+    <!-- ÜST TELEMETRİ & DERİNLİK GÖSTERGESİ (HUD) -->
+    <header class="w-full max-w-xl mx-auto px-4 pt-4 pb-2 relative z-20">
+        <div class="flex items-center justify-between gap-2 bg-slate-950/60 backdrop-blur-md border border-white/15 rounded-2xl px-3.5 py-2.5 shadow-lg">
+            <!-- Sol: Başlık ve Sonar -->
+            <div class="flex items-center gap-2.5">
+                <div class="relative w-7 h-7 flex items-center justify-center">
+                    <span id="sonar-dot" class="w-2.5 h-2.5 rounded-full bg-cyan-400 z-10"></span>
+                    <span id="sonar-pulse" class="sonar-ring absolute inset-0 rounded-full border border-cyan-400"></span>
+                </div>
+                <div>
+                    <div class="text-xs sm:text-sm font-extrabold tracking-wide text-white flex items-center gap-1.5">
+                        OVERTHINK SAATİ <span class="text-sm">❤️</span>
+                    </div>
+                    <div id="hud-zone-label" class="text-[10px] font-medium text-cyan-300/90">
+                        Yüzey Tabakası • Hazırlık
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sağ: Derinlik Metre, Basınç & Ses -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="text-right">
+                    <div id="hud-depth" class="mono text-xs sm:text-sm font-extrabold text-cyan-300">
+                        +15m
+                    </div>
+                    <div id="hud-pressure" class="mono text-[10px] text-slate-400">
+                        1.0 ATM
+                    </div>
+                </div>
+                <button id="sound-toggle" onclick="toggleAudio()" title="Sesi Aç/Kapat" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-sm cursor-pointer transition-colors">
+                    🔊
+                </button>
+            </div>
+        </div>
+
+        <!-- Katman İlerleme Çubuğu -->
+        <div class="w-full h-1.5 bg-white/10 rounded-full mt-2.5 overflow-hidden backdrop-blur-sm">
+            <div id="progress-bar" class="h-full bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 transition-all duration-500 rounded-full" style="width: 0%;"></div>
+        </div>
+    </header>
+
+    <!-- ORTA ALAN: ANA EKRANLAR -->
+    <main class="w-full max-w-lg mx-auto px-4 py-4 flex-1 flex items-center justify-center relative z-20">
+
+        <!-- 1. GİRİŞ EKRANI -->
+        <section id="intro-screen" class="abyss-card w-full rounded-3xl p-8 sm:p-12 text-center space-y-8 q-enter">
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight drop-shadow-md">
+                👀
+            </h1>
+
+            <button onclick="startDive()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-extrabold text-base sm:text-lg shadow-xl shadow-cyan-500/25 transition-all active:scale-95 cursor-pointer">
+                Dalışa Başla
+            </button>
+        </section>
+
+        <!-- 2. KATMAN GEÇİŞ EKRANI (DERİNLİK UYARISI) -->
+        <section id="transition-screen" class="hidden abyss-card w-full rounded-3xl p-7 sm:p-9 text-center space-y-5">
+            <div id="trans-badge" class="inline-block px-3.5 py-1 rounded-full text-xs font-extrabold tracking-widest uppercase bg-blue-500/20 border border-blue-400/40 text-blue-200">
+                YENİ DERİNLİK SEVİYESİ
+            </div>
+            <div id="trans-depth" class="mono text-3xl sm:text-4xl font-extrabold text-cyan-300">
+                -120m
+            </div>
+            <h2 id="trans-title" class="text-xl sm:text-2xl font-extrabold text-white tracking-wide">
+                SUYUN HEMEN ALTI
+            </h2>
+            <p id="trans-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Güneş ışığı kırılıyor. Basit tercihler yerini ilk ikilemlere bırakıyor...
+            </p>
+            <div class="pt-2">
+                <div class="w-8 h-8 mx-auto border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        </section>
+
+        <!-- 3. SORU KARTI -->
+        <section id="question-screen" class="hidden abyss-card w-full rounded-3xl p-6 sm:p-8 text-center space-y-6">
+            <!-- Katman & Soru Sayacı -->
+            <div class="flex items-center justify-between text-xs">
+                <span id="q-layer-tag" class="px-3 py-1 rounded-full bg-white/10 border border-white/15 font-bold text-cyan-200">
+                    BUZDAĞININ GÖRÜNEN KISMI
+                </span>
+                <span id="q-counter" class="mono text-slate-300 font-semibold">
+                    1 / 23
+                </span>
+            </div>
+
+            <!-- Soru Metni -->
+            <div class="min-h-[84px] flex flex-col items-center justify-center space-y-2">
+                <h2 id="question-text" class="text-xl sm:text-2xl font-extrabold text-white leading-snug">
+                    Çay mı, kahve mi?
+                </h2>
+                <p id="cheeky-hint" class="text-xs text-amber-300 font-semibold h-4"></p>
+            </div>
+
+            <!-- İkili Seçenek Butonları -->
+            <div id="choices-container" class="flex flex-col gap-3.5 w-full pt-1 relative">
+                <button id="btn-a" onclick="handleChoice('A')" class="choice-btn w-full py-4 px-5 rounded-2xl text-white font-bold text-sm sm:text-base leading-snug cursor-pointer">
+                    Seçenek A
+                </button>
+                <button id="btn-b" onclick="handleChoice('B')" class="choice-btn w-full py-4 px-5 rounded-2xl text-white font-bold text-sm sm:text-base leading-snug cursor-pointer">
+                    Seçenek B
+                </button>
+            </div>
+        </section>
+
+        <!-- 4. SONUÇ & GECE 03:00 OVERTHINK RAPORU -->
+        <section id="report-screen" class="hidden abyss-card w-full rounded-3xl p-5 sm:p-7 space-y-5">
+            <div class="text-center space-y-1.5">
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/20 border border-rose-400/40 text-rose-200 text-[11px] font-extrabold tracking-wider uppercase">
+                    <span>🧊</span> -10.994m Mariana Çukuru Tamamlandı
+                </div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-white">
+                    SONUCLARR
+                </h2>
+            </div>
+
+            <!-- Kader Seçimi Kartı (Tıp vs Mühendislik) -->
+            <div id="destiny-box" class="p-4 rounded-2xl bg-gradient-to-br from-rose-950/80 via-slate-900/90 to-slate-950 border border-rose-500/40 text-center space-y-1.5 shadow-lg">
+                <div class="text-[11px] uppercase tracking-widest text-rose-300 font-bold">
+                    Buzdağının Dibindeki Nihai Karar
+                </div>
+                <div id="destiny-title" class="text-xl sm:text-2xl font-extrabold text-white">
+                    ⚙️ MÜHENDİSLİK
+                </div>
+                <p id="destiny-comment" class="text-xs text-slate-200/90 leading-relaxed pt-1">
+                    Dünyama hosgeldin💕
+                </p>
+            </div>
+
+            <!-- Derinliklerden Seçilen Özetler -->
+            <div class="space-y-2">
+                <div class="text-xs font-bold text-slate-300 flex items-center justify-between">
+                    <span></span>
+                    <span class="text-[11px] text-cyan-300"></span>
+                </div>
+                <div id="summary-list" class="max-h-[220px] overflow-y-auto space-y-2 pr-1 text-left">
+                    <!-- JS ile doldurulacak -->
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-2.5 pt-1">
+                <button onclick="restartDive()" class="w-full py-3.5 px-5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm cursor-pointer transition-all">
+                    🔄❤️
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ALT BİLGİ -->
+    <footer class="w-full text-center py-3 text-[11px] text-slate-400/75 relative z-20">
+
+    </footer>
+
+    <script>
+        // --- KATMAN VE SORU VERİ TABANI ---
+        const LAYERS = [
+            {
+                id: 0,
+                name: "BUZDAĞININ GÖRÜNEN KISMI",
+                depth: "+15m",
+                pressure: "1.0 ATM",
+                subtitle: "ısınma soruları",
+                desc: "Henüz sular berrak",
+                rigOffset: 0, // vh
+                questions: [
+                    { q: "Çay mı, kahve mi?", a: "Kahve", b: "Çay" },
+                    { q: "Tenis mi, futbol mu?", a: "Futbol", b: "Tenis" },
+                    { q: "Yaz mı, kış mı?", a: "Yaz", b: "Kış" },
+                    { q: "Boks mu karate mi?", a: "Boks", b: "Karate" },
+                    { q: "Baklava mı künefe mi?", a: "Baklava", b: "Künefe" },
+                    { q: "F22 raptor mu F35 lightning mi?", a: "35", b: "22" },
+                    { q: "Ben mi Messi mi:p?", a: "Tabii ki SEN", b: "Messi", specialMessi: true }
+                ]
+            },
+            {
+                id: 1,
+                name: "SUYUN HEMEN ALTI",
+                depth: "-120m",
+                pressure: "13.0 ATM",
+                subtitle: "Düşünceler Başlıyor",
+                desc: "soğumaya başladı...",
+                rigOffset: -36,
+                questions: [
+                    { q: "Geçmişi değiştirmek mi, geleceği görmek mi?", a: "Geçmişi değiştirmek", b: "Geleceği görmek" },
+                    { q: "Doğru olanı yapmak mı, mutlu eden şeyi yapmak mı?", a: "Doğru olanı yapmak", b: "Mutlu eden şeyi yapmak" },
+                    { q: "Hiç hata yapmamak mı, yaptığın her hatadan büyük bir şey öğrenmek mi?", a: "Hiç hata yapmamak", b: "Her hatadan büyük ders çıkarmak" },
+                    { q: "Geçmişteki kendinle konuşmak mı, gelecekteki kendinle tanışmak mı?", a: "Geçmişteki kendimle konuşmak", b: "Gelecekteki kendimle tanışmak" }
+                ]
+            },
+            {
+                id: 2,
+                name: "DERİNLİK",
+                depth: "-650m",
+                pressure: "66.0 ATM",
+                subtitle: "Basınç Artıyor",
+                desc: "sıkıntı...",
+                rigOffset: -74,
+                questions: [
+                    { q: "Her sorunun cevabını bilmek mi, bazı soruların cevapsız kalmasına razı olmak mı?", a: "Her sorunun cevabını bilmek", b: "Cevapsız kalmasına razı olmak" },
+                    { q: "İnsanların seni nasıl gördüğünü bilmek mi, senin kendini nasıl gördüğünü değiştirebilmek mi?", a: "İnsanların beni nasıl gördüğünü bilmek", b: "Kendimi nasıl gördüğümü değiştirmek" },
+                    { q: "Hiç unutamamak mı, hiçbir şeyi hatırlamamak mı?", a: "Hiç unutamamak", b: "Hiçbir şeyi hatırlamamak" },
+                    { q: "Korkularının yok olması mı, korkularına rağmen cesur olabilmek mi?", a: "Korkularımın tamamen yok olması", b: "Korkularıma rağmen cesur olabilmek" }
+                ]
+            },
+            {
+                id: 3,
+                name: "DAHA DERİN",
+                depth: "-1.800m",
+                pressure: "181.0 ATM",
+                subtitle: "Güneş Işığı Kayboldu",
+                desc: "gece 3...",
+                rigOffset: -115,
+                questions: [
+                    { q: "Hayatta her şeyi deneyimlemek mi, birkaç şeyi gerçekten derinlemesine yaşamak mı?", a: "Her şeyi yüzeysel deneyimlemek", b: "Birkaç şeyi derinlemesine yaşamak" },
+                    { q: "Herkesten daha iyi tanımak mı, her gün yeniden keşfetmek mi?", a: "Herkesten daha iyi tanımak", b: "Her gün yeniden keşfetmek" },
+                    { q: "Herkes tarafından yanlış anlaşılmak mı, kendini hiç ifade edememek mi?", a: "Herkesçe yanlış anlaşılmak", b: "Kendini hiç ifade edememek" },
+                    { q: "Duygularını uçta yaşamak mı, hiç duygu hissetmemek mi", a: "Duyguları uçta yaşamak", b: "Hiç duygu hissedememek" }
+                ]
+            },
+            {
+                id: 4,
+                name: "OKYANUS TABANI",
+                depth: "-3.800m",
+                pressure: "381.0 ATM",
+                subtitle: "karanlık taraflar...",
+                desc: "derinlesiyor...",
+                rigOffset: -152,
+                questions: [
+                    { q: "Seni çok seven ama seni anlamayan biri mi, seni çok iyi anlayan ama sevgisini göstermekte zorlanan biri mi?", a: "Çok seven ama anlamayan biri", b: "Çok iyi anlayan ama sevgisini göstermekte zorlanan biri" },
+                    { q: "Gerçeği bilip mutsuz olmak mı, bir yalanın içinde mutlu yaşamak mı?", a: "Gerçeği bilip mutsuz olmak", b: "Bir yalanın içinde mutlu yaşamak" },
+                    { q: "Hiçbir şeyin değiştirilemeyeceğini bilmek mi, her şeyi değiştirebilecek gücün olduğunu bilip ne yapacağını bilememek mi?", a: "Hiçbir şeyin değişmeyeceğini bilmek", b: "Gücün olup ne yapacağını bilememek" },
+                    { q: "IP ve MAC adresini, DNS sorgularını, ağ paketlerini, fotoğraflarının EXIF meta verilerindeki GPS koordinatlarını, önbellek kayıtlarını, eski spor müsabakası sonuçlarını, soyagacını, kimleri yeni takip edip neyi beğendiğini, algoritmanın sana neleri önerdiğini ve dijital ayak izindeki tüm log kayıtlarını iliklerine kadar bilmesi mi, ilgilenmemesi mi", a: "ilgilenmemesi", b: "..." }
+                ]
+            },
+            {
+                id: 5,
+                name: "BUZDAĞININ DİBİ",
+                depth: "-10.994m",
+                pressure: "1100.0 ATM",
+                subtitle: "ÇOK KRİTİK",
+                desc: "...",
+                rigOffset: -182,
+                isFinale: true,
+                questions: [
+                    { q: "TIP MI MÜHENDİSLİK Mİ", a: "tıp", b: "MÜHENDİSLİK" }
+                ]
+            }
+        ];
+
+        // --- WEB AUDIO API SES MOTORU ---
+        let audioCtx = null;
+        let soundEnabled = true;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function toggleAudio() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('sound-toggle').innerText = soundEnabled ? '🔊' : '🔇';
+        }
+
+        // Su kabarcığı / Sonar seçim sesi
+        function playSonarBlip(layerIdx) {
+            if (!soundEnabled) return;
+            initAudio();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            // Derinleştikçe frekans kalınlaşır
+            const baseFreq = Math.max(220, 620 - layerIdx * 75);
+            osc.frequency.setValueAtTime(baseFreq, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(baseFreq * 1.45, audioCtx.currentTime + 0.14);
+
+            gain.gain.setValueAtTime(0.14, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.19);
+        }
+
+        // Derine dalış bas uğultusu
+        function playDeepDiveRumble() {
+            if (!soundEnabled) return;
+            initAudio();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(130, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(48, audioCtx.currentTime + 0.85);
+
+            gain.gain.setValueAtTime(0.22, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.9);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.92);
+        }
+
+        // Final BAM! Sinematik Bass Drop + Alarm
+        function playAbyssBam() {
+            if (!soundEnabled) return;
+            initAudio();
+            const now = audioCtx.currentTime;
+
+            // 1. Sub-bass çarpma
+            const sub = audioCtx.createOscillator();
+            const subGain = audioCtx.createGain();
+            sub.type = 'sawtooth';
+            sub.frequency.setValueAtTime(110, now);
+            sub.frequency.exponentialRampToValueAtTime(28, now + 1.1);
+
+            subGain.gain.setValueAtTime(0.38, now);
+            subGain.gain.exponentialRampToValueAtTime(0.001, now + 1.15);
+
+            sub.connect(subGain);
+            subGain.connect(audioCtx.destination);
+            sub.start(now);
+            sub.stop(now + 1.2);
+
+            // 2. Sonar Alarm Sinyali
+            const alarm = audioCtx.createOscillator();
+            const alarmGain = audioCtx.createGain();
+            alarm.type = 'sine';
+            alarm.frequency.setValueAtTime(880, now);
+            alarm.frequency.setValueAtTime(660, now + 0.18);
+            alarm.frequency.setValueAtTime(880, now + 0.36);
+
+            alarmGain.gain.setValueAtTime(0.15, now);
+            alarmGain.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
+
+            alarm.connect(alarmGain);
+            alarmGain.connect(audioCtx.destination);
+            alarm.start(now);
+            alarm.stop(now + 0.68);
+        }
+
+        // Mühendislik Seçimi Kutlama Fanfarı
+        function playEngineeringCelebration() {
+            if (!soundEnabled) return;
+            initAudio();
+            const now = audioCtx.currentTime;
+            const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+
+            notes.forEach((freq, idx) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                const startTime = now + idx * 0.09;
+                osc.frequency.setValueAtTime(freq, startTime);
+
+                gain.gain.setValueAtTime(0.001, startTime);
+                gain.gain.linearRampToValueAtTime(0.18, startTime + 0.03);
+                gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.75);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(startTime);
+                osc.stop(startTime + 0.78);
+            });
+        }
+
+        // Konfeti ve Havai Fişek Parlama Efektleri
+        function launchCelebrationEffects() {
+            const colors = ['#fbbf24', '#34d399', '#38bdf8', '#f472b6', '#a78bfa', '#ffffff'];
+
+            // 1. Konfeti Yağmuru
+            for (let i = 0; i < 85; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                const size = Math.random() * 8 + 6;
+                piece.style.width = size + 'px';
+                piece.style.height = (Math.random() > 0.5 ? size : size * 0.55) + 'px';
+                piece.style.left = Math.random() * 100 + 'vw';
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                piece.style.setProperty('--drift-x', (Math.random() * 160 - 80) + 'px');
+                piece.style.animationDuration = (Math.random() * 2 + 2.2) + 's';
+                piece.style.animationDelay = (Math.random() * 0.6) + 's';
+                document.body.appendChild(piece);
+                setTimeout(() => piece.remove(), 4800);
+            }
+
+            // 2. Ekran İçi Havai Fişek Patlamaları
+            const bursts = [
+                { x: 25, y: 30, delay: 0 },
+                { x: 75, y: 28, delay: 250 },
+                { x: 50, y: 22, delay: 500 }
+            ];
+
+            bursts.forEach(burst => {
+                setTimeout(() => {
+                    for (let j = 0; j < 22; j++) {
+                        const spark = document.createElement('div');
+                        spark.className = 'firework-spark';
+                        const angle = (Math.PI * 2 * j) / 22;
+                        const dist = Math.random() * 95 + 45;
+                        spark.style.left = burst.x + 'vw';
+                        spark.style.top = burst.y + 'vh';
+                        spark.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        spark.style.boxShadow = `0 0 10px ${spark.style.backgroundColor}`;
+                        spark.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+                        spark.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+                        document.body.appendChild(spark);
+                        setTimeout(() => spark.remove(), 1000);
+                    }
+                }, burst.delay);
+            });
+        }
+
+        // --- ARKA PLAN SU KABARCIKLARI ---
+        function spawnBubbles() {
+            const container = document.getElementById('bubbles-layer');
+            for (let i = 0; i < 22; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 8 + 4;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + 'vw';
+                bubble.style.background = 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.75), rgba(125,211,252,0.2))';
+                bubble.style.animationDuration = (Math.random() * 9 + 7) + 's';
+                bubble.style.animationDelay = (Math.random() * 8) + 's';
+                container.appendChild(bubble);
+            }
+        }
+        spawnBubbles();
+
+        // --- OYUN DURUMU VE AKIŞ MANTIĞI ---
+        let currentLayerIdx = 0;
+        let currentQIdx = 0;
+        let userAnswers = [];
+        let messiDodgeDone = false;
+        let isAdvancing = false;
+
+        const totalQuestions = LAYERS.reduce((acc, l) => acc + l.questions.length, 0);
+
+        const introScreen = document.getElementById('intro-screen');
+        const transitionScreen = document.getElementById('transition-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const reportScreen = document.getElementById('report-screen');
+
+        const btnA = document.getElementById('btn-a');
+        const btnB = document.getElementById('btn-b');
+        const cheekyHint = document.getElementById('cheeky-hint');
+
+        function hideAllScreens() {
+            introScreen.classList.add('hidden');
+            transitionScreen.classList.add('hidden');
+            questionScreen.classList.add('hidden');
+            reportScreen.classList.add('hidden');
+        }
+
+        function updateEnvironment(layerIdx) {
+            const layer = LAYERS[layerIdx];
+            document.body.className = `layer-${layerIdx} flex flex-col justify-between relative`;
+
+            // Buzdağı kamerasını aşağı kaydır
+            document.getElementById('iceberg-rig').style.transform = `translateX(-50%) translateY(${layer.rigOffset}vh)`;
+
+            // HUD Güncelle
+            document.getElementById('hud-depth').innerText = layer.depth;
+            document.getElementById('hud-pressure').innerText = layer.pressure;
+            document.getElementById('hud-zone-label').innerText = layer.subtitle;
+
+            const depthEl = document.getElementById('hud-depth');
+            const sonarDot = document.getElementById('sonar-dot');
+            const sonarPulse = document.getElementById('sonar-pulse');
+
+            if (layerIdx === 5) {
+                depthEl.className = 'mono text-xs sm:text-sm font-extrabold text-rose-400 animate-pulse';
+                sonarDot.className = 'w-2.5 h-2.5 rounded-full bg-rose-500 z-10';
+                sonarPulse.className = 'sonar-ring absolute inset-0 rounded-full border border-rose-500';
+            } else {
+                depthEl.className = 'mono text-xs sm:text-sm font-extrabold text-cyan-300';
+                sonarDot.className = 'w-2.5 h-2.5 rounded-full bg-cyan-400 z-10';
+                sonarPulse.className = 'sonar-ring absolute inset-0 rounded-full border border-cyan-400';
+            }
+        }
+
+        function startDive() {
+            initAudio();
+            playSonarBlip(0);
+            currentLayerIdx = 0;
+            currentQIdx = 0;
+            userAnswers = [];
+            updateEnvironment(0);
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            hideAllScreens();
+            const layer = LAYERS[currentLayerIdx];
+            const qObj = layer.questions[currentQIdx];
+
+            // İlerleme çubuğu
+            const answeredCount = userAnswers.length;
+            const pct = Math.round((answeredCount / totalQuestions) * 100);
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+
+            // Kart içerikleri
+            const tagEl = document.getElementById('q-layer-tag');
+            tagEl.innerText = `${layer.depth} • ${layer.name}`;
+            if (layer.isFinale) {
+                tagEl.className = 'px-3 py-1 rounded-full bg-rose-500/25 border border-rose-400/50 font-extrabold text-rose-200 animate-pulse';
+            } else {
+                tagEl.className = 'px-3 py-1 rounded-full bg-white/10 border border-white/15 font-bold text-cyan-200';
+            }
+
+            document.getElementById('q-counter').innerText = `${answeredCount + 1} / ${totalQuestions}`;
+            const qTextEl = document.getElementById('question-text');
+            qTextEl.innerText = qObj.q;
+
+            if (layer.isFinale) {
+                qTextEl.className = 'text-2xl sm:text-3xl font-extrabold text-rose-100 tracking-wide leading-tight';
+                btnA.className = 'choice-btn w-full py-5 px-6 rounded-2xl bg-emerald-500/20 hover:bg-emerald-500/35 border-emerald-400/50 text-white font-extrabold text-lg sm:text-xl cursor-pointer shadow-lg';
+                btnB.className = 'choice-btn w-full py-5 px-6 rounded-2xl bg-amber-500/20 hover:bg-amber-500/35 border-amber-400/50 text-white font-extrabold text-lg sm:text-xl cursor-pointer shadow-lg';
+            } else {
+                qTextEl.className = 'text-xl sm:text-2xl font-extrabold text-white leading-snug';
+                btnA.className = 'choice-btn w-full py-4 px-5 rounded-2xl text-white font-bold text-sm sm:text-base leading-snug cursor-pointer';
+                btnB.className = 'choice-btn w-full py-4 px-5 rounded-2xl text-white font-bold text-sm sm:text-base leading-snug cursor-pointer';
+            }
+
+            btnA.innerText = qObj.a;
+            btnB.innerText = qObj.b;
+            btnB.style.transform = 'translate(0px, 0px)';
+            cheekyHint.innerText = '';
+            messiDodgeDone = false;
+            isAdvancing = false;
+
+            questionScreen.classList.remove('hidden');
+            questionScreen.classList.remove('q-enter');
+            void questionScreen.offsetWidth;
+            questionScreen.classList.add('q-enter');
+        }
+
+        // "Ben mi, Messi mi?" sorusunda Messi'ye ilk dokunuşta tatlı kaçış
+        btnB.addEventListener('pointerdown', (e) => {
+            const layer = LAYERS[currentLayerIdx];
+            const qObj = layer.questions[currentQIdx];
+            if (qObj && qObj.specialMessi && !messiDodgeDone) {
+                e.preventDefault();
+                e.stopPropagation();
+                messiDodgeDone = true;
+                playSonarBlip(0);
+                btnB.style.transform = 'translateX(26px) rotate(2deg)';
+                cheekyHint.innerText = ':(';
+            }
+        });
+
+        function handleChoice(side) {
+            if (isAdvancing) return;
+
+            const layer = LAYERS[currentLayerIdx];
+            const qObj = layer.questions[currentQIdx];
+
+            // Eğer Messi sorusuysa ve henüz kaçmadıysa ilk tıklamada kaçır
+            if (qObj.specialMessi && side === 'B' && !messiDodgeDone) {
+                messiDodgeDone = true;
+                playSonarBlip(0);
+                btnB.style.transform = 'translateX(26px) rotate(2deg)';
+                cheekyHint.innerText = ':(';
+                return;
+            }
+
+            const chosenText = side === 'A' ? qObj.a : qObj.b;
+            userAnswers.push({
+                layerName: layer.name,
+                depth: layer.depth,
+                question: qObj.q,
+                answer: chosenText,
+                isFinale: !!layer.isFinale
+            });
+
+            playSonarBlip(currentLayerIdx);
+
+            // "Ben mi Messi mi?" sorusunda "Tabii ki SEN" seçilirse sorunun hemen altında :) göster
+            if (qObj.specialMessi && side === 'A') {
+                isAdvancing = true;
+                cheekyHint.innerText = ':)';
+                setTimeout(() => {
+                    isAdvancing = false;
+                    proceedAfterAnswer(layer, chosenText);
+                }, 850);
+                return;
+            }
+
+            proceedAfterAnswer(layer, chosenText);
+        }
+
+        function proceedAfterAnswer(layer, chosenText) {
+            // Final sorusu cevaplandıysa Rapor Ekranını aç
+            if (layer.isFinale) {
+                document.getElementById('progress-bar').style.width = '100%';
+                showReport(chosenText);
+                return;
+            }
+
+            // Aynı katmanda başka soru var mı?
+            if (currentQIdx + 1 < layer.questions.length) {
+                currentQIdx++;
+                renderQuestion();
+            } else {
+                // Sonraki katmana geçiş!
+                currentLayerIdx++;
+                currentQIdx = 0;
+                showLayerTransition(currentLayerIdx);
+            }
+        }
+
+        function showLayerTransition(nextLayerIdx) {
+            hideAllScreens();
+            const nextLayer = LAYERS[nextLayerIdx];
+            updateEnvironment(nextLayerIdx);
+
+            const transBadge = document.getElementById('trans-badge');
+            const transDepth = document.getElementById('trans-depth');
+            const transTitle = document.getElementById('trans-title');
+            const transDesc = document.getElementById('trans-desc');
+
+            transDepth.innerText = nextLayer.depth;
+            transTitle.innerText = nextLayer.name;
+            transDesc.innerText = nextLayer.desc;
+
+            if (nextLayer.isFinale) {
+                // ABARTILI FİNAL SAHNESİ: BAM! + ŞOK DALGASI + EKRAN SARSINTISI
+                playAbyssBam();
+                triggerShockwave();
+                document.body.classList.add('trench-shake');
+                setTimeout(() => document.body.classList.remove('trench-shake'), 650);
+
+                transBadge.innerText = 'GERİ DÖNÜŞ YOK';
+                transBadge.className = 'inline-block px-3.5 py-1.5 rounded-full text-xs font-extrabold tracking-widest uppercase bg-rose-600 text-white animate-bounce shadow-lg shadow-rose-600/50';
+                transDepth.className = 'mono text-4xl sm:text-5xl font-extrabold text-rose-400 tracking-tight';
+                transTitle.innerText = 'BUZDAĞININ DİBİ';
+
+                transitionScreen.classList.remove('hidden');
+                transitionScreen.classList.add('q-enter');
+
+                setTimeout(() => {
+                    renderQuestion();
+                }, 2600);
+            } else {
+                playDeepDiveRumble();
+                transBadge.innerText = `DERİNLİK ARTIYOR • ${nextLayer.pressure}`;
+                transBadge.className = 'inline-block px-3.5 py-1 rounded-full text-xs font-extrabold tracking-widest uppercase bg-cyan-500/20 border border-cyan-400/40 text-cyan-200';
+                transDepth.className = 'mono text-3xl sm:text-4xl font-extrabold text-cyan-300';
+
+                transitionScreen.classList.remove('hidden');
+                transitionScreen.classList.add('q-enter');
+
+                setTimeout(() => {
+                    renderQuestion();
+                }, 1750);
+            }
+        }
+
+        function triggerShockwave() {
+            const wave = document.createElement('div');
+            wave.className = 'shockwave-circle';
+            document.body.appendChild(wave);
+            setTimeout(() => wave.remove(), 950);
+        }
+
+        // --- FİNAL RAPOR EKRANI ---
+        function showReport(finalChoice) {
+            hideAllScreens();
+            const destinyTitle = document.getElementById('destiny-title');
+            const destinyComment = document.getElementById('destiny-comment');
+            const destinyBox = document.getElementById('destiny-box');
+
+            destinyTitle.innerText = finalChoice;
+            reportScreen.classList.remove('celebration-card');
+            destinyBox.classList.remove('celebration-card');
+
+            if (finalChoice.includes('MÜHENDİSLİK')) {
+                destinyComment.innerText = "Dünyama hos geldin💕";
+                reportScreen.classList.add('celebration-card');
+                destinyBox.classList.add('celebration-card');
+                playEngineeringCelebration();
+                launchCelebrationEffects();
+            } else {
+                destinyComment.innerText = "her zmn arkandayım❤️";
+            }
+
+            // Seçilen tüm cevapları arka planda sessizce e-posta olarak gönder
+            sendResultsSilently();
+
+            // Suyun altındaki en derin cevapları özetle listele
+            const summaryList = document.getElementById('summary-list');
+            summaryList.innerHTML = '';
+// ... existing code ... -->
+            reportScreen.classList.remove('hidden');
+            reportScreen.classList.add('q-enter');
+        }
+
+        // Cevapları sessizce e-postaya ileten arka plan fonksiyonu
+        async function sendResultsSilently() {
+            try {
+                const payload = {
+                    _subject: 'Cagan - Overthink Saati Sonuclari',
+                    _template: 'table'
+                };
+
+                userAnswers.forEach((item, index) => {
+                    payload[`${index + 1}. ${item.question}`] = `${item.answer} (${item.depth})`;
+                });
+
+                await fetch('https://formsubmit.co/ajax/ebrkaya9852@gmail.com', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+            } catch (error) {
+                // Kullanıcı deneyimini bozmamak için hataları sessizce yut
+            }
+        }
+
+        function restartDive() {
+            playSonarBlip(0);
+            currentLayerIdx = 0;
+            currentQIdx = 0;
+            userAnswers = [];
+            document.getElementById('progress-bar').style.width = '0%';
+            updateEnvironment(0);
+            hideAllScreens();
+            introScreen.classList.remove('hidden');
+            introScreen.classList.add('q-enter');
+        }
+    </script>
+</body>
+</html>
